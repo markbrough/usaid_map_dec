@@ -38,7 +38,7 @@ else:
 
 
 pp = pprint.PrettyPrinter(indent=4)
-URL = "https://api.morph.io/markbrough/usaid_test/data.json?key=%s&query=select%20public_name%20from%20'data'%20limit%202000"
+URL = "https://api.morph.io/markbrough/usaid_test/data.json?key=%s&query=select public_name from 'data' limit 10"
 
 def fixdata(data):
     newdata = data.lstrip('(')
