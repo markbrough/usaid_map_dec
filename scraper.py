@@ -56,7 +56,7 @@ thedata = json.loads(fixdata(data))
 for project in thedata:
     print project['public_name']
     query = TITLE_SEARCH % (project['public_name'])
-    base64_query  = query.encode("base64")
+    base64_query  = str(query.encode("base64"))
     print base64_query
     decreq = urllib2.Request(DEC_URL % (base64_query))
     decwebfile = urllib2.urlopen(decreq)
