@@ -58,7 +58,7 @@ for project in thedata:
     query = TITLE_SEARCH % (project['public_name'])
     base64_query  = query.encode("base64")
     print base64_query
-    decqueryurl = DEC_URL % (base64_query)
+    decqueryurl = DEC_URL % (base64_query.strip())
     print decqueryurl
     decreq = urllib2.Request(DEC_URL % (base64_query))
     print decreq
