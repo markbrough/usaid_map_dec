@@ -39,6 +39,8 @@ else:
 
 pp = pprint.PrettyPrinter(indent=4)
 URL = "https://api.morph.io/markbrough/usaid_test/data.json?key=%s&query=select public_name from 'data' limit 10"
+DEC_URL = "https://dec.usaid.gov/api/qsearch.ashx?q=%s&rtype=json"
+TITLE_SEARCH = "(Documents.Document_Title:(%s))"
 
 def fixdata(data):
     newdata = data.lstrip('(')
@@ -52,7 +54,11 @@ data = webfile.read()
 thedata = json.loads(fixdata(data))
 
 for project in thedata:
-    print project
-
-#printable_data = json.dumps(thedata)
-#pp.pprint(printable_data)
+    print project['public_name']
+    query = TITLE_SEARCH % (project['public_name'])
+    base64_query  = query.encode("base64")
+    decreq = urllib2.Request(DEC_URL % (base64_query))
+    webreq = urllib2.urlopen(decreq)
+    decdata = webreq.read()
+    thedecdata = decdata.read(json.loads(decdata))
+    print len(thedecdata)
