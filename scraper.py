@@ -59,7 +59,7 @@ for project in thedata:
     base64_query  = query.encode("base64")
     print base64_query
     
-    decqueryurl = DEC_URL % (base64_query.strip())
+    decqueryurl = (DEC_URL % (base64_query.strip()))
     print decqueryurl.strip()
     decreq = urllib2.Request(decqueryurl)
     decwebfile = urllib2.urlopen(decreq)
