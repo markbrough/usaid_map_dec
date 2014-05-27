@@ -21,3 +21,38 @@
 # on Morph for Python (https://github.com/openaustralia/morph-docker-python/blob/master/pip_requirements.txt) and all that matters
 # is that your final data is written to an Sqlite database called data.sqlite in the current working directory which
 # has at least a table called data.
+
+import scraperwiki
+from lxml import html
+import urllib2
+import re
+import string
+import json
+import pprint
+
+import os
+if not 'MORPH_API_KEY' in os.environ:
+  exit()
+else:
+  apikey=os.environ['MORPH_API_KEY']
+
+
+pp = pprint.PrettyPrinter(indent=4)
+URL = "https://api.morph.io/markbrough/usaid_test/data.json?key=%s&query=select%20public_name%20from%20'data'%20limit%202000"
+
+def fixdata(data):
+    newdata = data.lstrip('(')
+    newdata = newdata.rstrip(');')
+    return newdata
+
+req = urllib2.Request(URL % (apikey))
+webfile = urllib2.urlopen(req)
+data = webfile.read()
+
+thedata = json.loads(fixdata(data))
+
+for project in thedata:
+    print project
+
+#printable_data = json.dumps(thedata)
+#pp.pprint(printable_data)
