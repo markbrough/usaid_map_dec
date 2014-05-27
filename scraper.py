@@ -38,7 +38,7 @@ else:
 
 
 pp = pprint.PrettyPrinter(indent=4)
-URL = "https://api.morph.io/markbrough/usaid_test/data.json?key=%s&query=select public_name from 'data' limit 10"
+URL = "https://api.morph.io/markbrough/usaid_test/data.json?key=%s&query=select public_name from 'data' limit 10 offset 10"
 DEC_URL = "https://dec.usaid.gov/api/qsearch.ashx?q=%s&rtype=json"
 TITLE_SEARCH = "(Documents.Document_Title:(%s))"
 
